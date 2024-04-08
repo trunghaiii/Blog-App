@@ -1,14 +1,16 @@
 'use client'
 import AppTable from "@/components/app.table";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const [blogData, setBlogData] = useState([])
 
   const fetchBlogData = async () => {
     const response = await fetch("http://localhost:8000/blogs");
     const blogData = await response.json();
 
-    console.log('blogData: ', blogData);
+    setBlogData(blogData)
 
   }
 
@@ -18,7 +20,9 @@ export default function Home() {
 
   return (
     <div>
-      <AppTable />
+      <AppTable
+        blogs={blogData}
+      />
     </div>
   );
 }
