@@ -1,6 +1,7 @@
 'use client'
 import AppTable from "@/components/app.table";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function Home() {
 
