@@ -18,7 +18,17 @@ function NewModal(props: IProps) {
     const handleClose = () => setOpenModal(false);
 
     const handleSubmit = () => {
-        console.log("hfgdfhg", title, author, content);
+
+        fetch('http://localhost:8000/blogs', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, author, content })
+        }).then(res => res.json())
+            .then(res => window.alert("Create the blog successfully!"));
+        // console.log("hfgdfhg", title, author, content);
 
     }
 
