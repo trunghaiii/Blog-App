@@ -12,6 +12,22 @@ const AppTable = (props: IProps) => {
 
     const { blogs } = props
 
+    const handleDeleteBlog = (id: number) => {
+        if (confirm("sure to delete???")) {
+            fetch(`http://localhost:8000/blogs/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                //body: JSON.stringify({ title, author, content })
+            }).then(res => res.json())
+                .then(res => window.alert("Delete the blog successfully!"));
+
+        }
+
+    }
+
     return (
         <>
             <div>
@@ -22,9 +38,9 @@ const AppTable = (props: IProps) => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>No</th>
                         <th>Title</th>
                         <th>Author</th>
+                        <th>Content</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -32,13 +48,16 @@ const AppTable = (props: IProps) => {
                     {blogs?.map(blog => {
                         return (
                             <tr>
-                                <td>{blog.id}</td>
                                 <td>{blog.title}</td>
                                 <td>{blog.author}</td>
+                                <td>{blog.content}</td>
                                 <td>
-                                    <Button>View</Button>
-                                    <Button variant='warning'>Delete</Button>
-                                    <Button variant='danger'>Update</Button>
+
+                                    <Button
+                                        variant='warning'
+                                        onClick={() => handleDeleteBlog(blog.id)}
+                                    >Delete</Button>
+
                                 </td>
                             </tr>
                         )
